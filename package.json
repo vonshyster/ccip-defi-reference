@@ -1,14 +1,24 @@
 {
-  "name": "cross-chain-defi-aggregator",
+  "name": "cross-chain-defi-aggregator-contracts",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "private": true,
+  "description": "Hardhat project for the Chainlink CCIP-powered cross-chain yield aggregator",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "clean": "hardhat clean",
+    "compile": "hardhat compile",
+    "test": "hardhat test",
+    "deploy:sepolia": "hardhat run scripts/deploy.js --network sepolia",
+    "deploy:mumbai": "hardhat run scripts/deploy.js --network polygonMumbai",
+    "deploy:fuji": "hardhat run scripts/deploy.js --network avalancheFuji"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "chainlink",
+    "ccip",
+    "hardhat",
+    "yield-aggregator"
+  ],
+  "author": "Andrew Walters",
+  "license": "MIT",
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox": "^6.1.0",
     "hardhat": "^3.1.0"

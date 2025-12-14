@@ -1,15 +1,24 @@
 # Cross-Chain DeFi Yield Aggregator
 
-A decentralized yield optimization protocol leveraging Chainlink CCIP for cross-chain asset management and yield farming.
+A decentralized yield optimization protocol leveraging Chainlink CCIP for cross-chain asset management and yield farming across multiple blockchains.
+
+## Repository Layout
+
+- `contracts/` – Solidity sources for the CCIP-enabled yield aggregator
+  - `interfaces/` – Shared protocol interfaces (e.g., `IYieldStrategy`)
+- `scripts/` – Hardhat deployment and maintenance scripts
+- `test/` – Contract tests (comprehensive test suite in development)
+- `hardhat.config.js` – Hardhat configuration (networks, paths, etherscan)
 
 ## Overview
 
-This project enables users to deposit funds on one blockchain and automatically optimize yields across multiple chains. It uses Chainlink's Cross-Chain Interoperability Protocol (CCIP) for secure cross-chain messaging and token transfers.
+This protocol enables users to deposit funds on one blockchain and automatically optimize yields across multiple chains. It leverages Chainlink's Cross-Chain Interoperability Protocol (CCIP) for secure, decentralized cross-chain messaging and token transfers, creating a unified yield optimization system across heterogeneous blockchain networks.
 
 ## Motivation
 
-Cross-chain yield routing today is fragmented, brittle, and security-sensitive. Protocols rely on ad-hoc bridges and custom messaging systems that introduce risk.
-This project demonstrates how Chainlink CCIP can serve as a secure transport layer for sending both value and intent across chains, enabling robust, multi-chain DeFi architectures.
+Cross-chain yield optimization today is fragmented and relies on ad-hoc bridges and custom messaging systems that introduce significant security risks. DeFi users often leave yields on the table because moving assets between chains is complex, expensive, and risky.
+
+This protocol demonstrates how Chainlink CCIP can serve as a secure, decentralized transport layer for both asset transfers and yield optimization intent across chains, enabling robust multi-chain DeFi architectures without compromising security.
 
 ## Features
 
@@ -81,6 +90,8 @@ Interface for yield strategy implementations:
 npm install
 ```
 
+This will install all Hardhat dependencies and tooling for smart contract development, testing, and deployment.
+
 ## Configuration
 
 1. Copy `.env.example` to `.env`:
@@ -100,6 +111,11 @@ cp .env.example .env
 npx hardhat compile
 ```
 
+Or via npm script:
+```bash
+npm run compile
+```
+
 ## Testing
 
 ```bash
@@ -111,6 +127,16 @@ npx hardhat test
 Deploy to Sepolia testnet:
 ```bash
 npx hardhat run scripts/deploy.js --network sepolia
+```
+
+Or with npm scripts:
+```bash
+npm run deploy:sepolia
+```
+
+You can override router/LINK addresses at runtime:
+```bash
+ROUTER_ADDRESS=0x... LINK_TOKEN_ADDRESS=0x... npm run deploy:sepolia
 ```
 
 ## Supported Networks (Testnet)
@@ -142,18 +168,25 @@ await yieldAggregator.requestYieldOptimization(
 await yieldAggregator.withdraw(tokenAddress, amount);
 ```
 
-## Roadmap
+## Development Roadmap
 
-- [ ] Implement Aave yield strategy
-- [ ] Implement Compound yield strategy
-- [ ] Add automated APY monitoring
-- [ ] Build frontend dashboard
-- [ ] Add support for more chains (Arbitrum, Optimism, Base)
+**Phase 1: Core Functionality** (In Progress)
+- [ ] Implement Aave V3 yield strategy on Sepolia testnet
+- [ ] Deploy and test CCIP cross-chain message flow on testnet
+- [ ] Create comprehensive unit and integration test suite
+- [ ] Add APY calculation and comparison logic
+
+**Phase 2: Production Readiness**
+- [ ] Implement additional yield strategies (Compound, others)
+- [ ] Add automated APY monitoring and rebalancing
 - [ ] Implement gas optimization strategies
 - [ ] Add emergency pause functionality
-- [ ] Create comprehensive test suite
-- [ ] Audit smart contracts
-- [ ] Mainnet deployment
+- [ ] Security audit preparation
+
+**Phase 3: Expansion**
+- [ ] Add support for more chains (Arbitrum, Optimism, Base)
+- [ ] Build frontend dashboard for user interactions
+- [ ] Mainnet deployment (after audit)
 
 ## Security Considerations
 
@@ -178,6 +211,10 @@ MIT
 
 Contributions welcome! Please open an issue or submit a PR.
 
+## Related Projects
+
+- **[Li.Fi Cross-Chain Swap Demo](https://github.com/andrewwalters/lifi-cross-chain-swap)** - Companion project demonstrating cross-chain swaps using Li.Fi SDK (separate approach from CCIP)
+
 ## Author
 
-Built with ☕️ by Andrew Walters - demonstrating CCIP fluency for cross-chain DeFi applications.
+Built by **Andrew Walters** - Demonstrating Chainlink CCIP expertise for cross-chain DeFi protocol development.
